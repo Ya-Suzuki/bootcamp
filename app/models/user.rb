@@ -282,6 +282,16 @@ SQL
     customer.sources.data.first
   end
 
+  def subscription?
+    subscription_id?
+  end
+
+  def subscription
+    if subscription?
+      Stripe::Subscription.retrieve(subscription_id)
+    end
+  end
+
   def student?
     !admin? && !adviser? && !mentor? && !trainee?
   end
