@@ -140,4 +140,10 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 6, User.new(created_at: "2014-04-10 00:00:00").generation
     assert_equal 29, User.new(created_at: "2020-01-10 00:00:00").generation
   end
+
+  test "set_emotions_and_dates" do
+    user = users(:advijirou)
+
+    assert_equal [date: Date.today, emotion: nil], user.set_emotions_and_dates(0)
+  end
 end
