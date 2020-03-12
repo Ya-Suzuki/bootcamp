@@ -50,7 +50,7 @@ export default {
           if(response.ok) {
             this.statusName = name
             return this
-          }else{
+          } else {
             response.json().then(data => {
               alert(data.error)
             });
