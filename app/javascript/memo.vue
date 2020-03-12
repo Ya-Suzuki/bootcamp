@@ -2,7 +2,7 @@
   .memo
     .memo-form
       label.memo-form__show-modal(v-bind:for="date")
-      input.memo-form__toggle-checkbox(type="checkbox" v-bind:id="date")
+      input.memo-form__toggle-checkbox(type="checkbox" v-bind:id="date" v-model="checked")
       .memo-form-modal
         .memo-form-modal__inner.a-card
           .card-header
@@ -10,9 +10,9 @@
               | メモ
           .card-body
             textarea.a-text-input(ref="sendBody" v-model="sendBody" name="memo[body]")
-            button.a-button.is-md.is-primary.is-block(@click="createMemo")
+            button.a-button.is-md.is-primary.is-block(v-if="!body" @click="createMemo")
               | 作成
-            button.a-button.is-md.is-warning.is-block(@click="updateMemo")
+            button.a-button.is-md.is-warning.is-block(v-else @click="updateMemo")
               | 更新
             button.a-button.is-md.is-danger.is-block(@click="deleteMemo")
               | 削除
@@ -27,7 +27,20 @@ export default {
     return {
       sendBody: '',
       id: '',
-      body: ''
+      body: '',
+      checked: false,
+    }
+  },
+  watch: {
+    body: function() {
+      this.checked = false;
+    },
+    checked: function() {
+      if (this.checked == false) {
+        this.sendBody = '';
+      } else {
+        this.sendBody = this.body;
+      }
     }
   },
   created: function() {
