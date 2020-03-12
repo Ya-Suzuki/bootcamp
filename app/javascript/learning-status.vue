@@ -47,7 +47,7 @@ export default {
         body: params
       })
         .then(response => {
-          if(response.ok) {
+          if (response.ok) {
             this.statusName = name
             return this
           } else {
