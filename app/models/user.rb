@@ -268,7 +268,7 @@ SQL
 
   def customer
     if customer_id?
-      Stripe::Customer.retrieve(customer_id)
+      Customer.new.retrieve(customer_id)
     end
   end
 
@@ -288,7 +288,7 @@ SQL
 
   def subscription
     if subscription?
-      Stripe::Subscription.retrieve(subscription_id)
+      Subscription.new.retrieve(subscription_id)
     end
   end
 
